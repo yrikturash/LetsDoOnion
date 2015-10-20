@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using Microsoft.Ajax.Utilities
+@model LetsDoOnion.DTO.IndexViewModel
+
+
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../Content/css/app.css">
+
+<script src='../../Content/nprogress/nprogress.js'></script>
+<link rel='stylesheet' href='../../Content/nprogress/nprogress.css'/>
+
+
+<div class="main">
+
+    <div id="lc">
+        <!--<div class="side-title">
+            <h3>Project Lists</h3>
+        </div>-->
+
+        <ul class="side-menu side-lists">
+            <li class="search-filter">
+                <div class="search-input-wrapper">
+                    <input type="text" placeholder="Search ..." id="search-item" value="">
+                </div>
+                <i class="icon-search"></i>
+                <span class="open">0</span>
+            </li>
+            <li class="@if (Model.ActiveCategoryId == null) { @Html.Raw("active") } " id="list-all">
+                <input type="radio" name="list_id" value="all" checked="checked">
+                <a href="/Home/Index/">
+                    <i class="icon-inbox"></i> Everything
+                    @*<span class="badge pull-right" style="margin-top: 10px">0</span>*@
+                </a>
+            </li>
+            @foreach (var item in Model.CategoriesList)
+            {
+                <li class="accepts-issues ui-droppable @if(item.Id == Model.ActiveCategoryId) {@Html.Raw("active")}" data-name="Important">
+                    <input type="radio" name="list_id" value="important">
+                    <a href="/Home/Index?categoryId=@item.Id">
+                        <i class="icon-list"></i> @item.Name
+                        <span class="glyphicon glyphicon-remove pull-right remove_category" data-id="@item.Id" style="margin-top: 10px" aria-hidden="true"></span>
+                    </a>
+                </li>
+
+            }
+            <li class="accepts-issues ui-droppable" data-name="Important" id="list-important">
+                <input type="radio" name="list_id" value="important">
+                <a href="#">
+                    <i class="icon-exclamation"></i> Important
+                </a>
+            </li>
+            <li class="accepts-issues hide ui-droppable" data-name="Backlog" id="list-backlog">
+                <input type="radio" name="list_id" value="backlog">
+                <a href="#">
+                    <i class="icon-archive"></i> Backlog
+                </a>
+            </li>
+            <li class="accepts-issues ui-droppable" data-name="Trash" id="list-trash">
+                <input type="radio" name="list_id" value="trash">
+                <a href="#">
+                    <i class="icon-trash"></i> Trash
+                </a>
+            </li>
+            <li class="accepts-issues ui-droppable" data-name="Trash" id="list-trash">
+                <div class="input-group" style="padding: 20px;">
+                    <input type="text" class="form-control" id="category_input" placeholder="New category...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="add_category_btn">Add</button>
+                    </span>
+                </div><!-- /input-group -->
+            </li>
+        </ul>
+        <ul class="side-menu side-lists project-defined-lists"></ul>
+
+        <!--BOTTOM SUBSCRIBE-->
+        <div class="subscribe">
+            <a href="http://debugle.com/projects/rss/19662/55bb33a8720c0bf315ec9192fc67c19cd0e22fdd" target="_blank"><i class="icon-rss"></i> <span>RSS</span></a>
+            <a href="webcal://debugle.com/projects/ical/19662/55bb33a8720c0bf315ec9192fc67c19cd0e22fdd"><i class="icon-calendar"></i> <span>iCal</span></a>
+        </div>
+
+        <!-- RESIZE -->
+        <div class="draggable sidebar-draggable">
+            <div class="top-draggable"></div>
+        </div>
+    </div>
+    <div id="rcc">
+        <div id="rc" style="width: 95%; margin: 0 auto;">
+
+            <div class="row">
+                <div class="col-md-7" style="margin: 20px 20px 20px 0;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="issue_input" placeholder="Enter new task...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="add_btn">Add</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+                <div class="col-md-4" style="margin: 20px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="uissue_input" placeholder="Enter new subtask...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="add_uissue_btn">Add</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+
+
+
+            <div class="row" style="margin-bottom: 5px;">
+                <a class="col-md-7" id="remove_completed">Remove completed tasks</a>
+                <a class="col-md-4" id="remove_completed2" style="margin-left: 40px;">Remove completed subtasks</a>
+            </div>
+
+            <div class="row">
+                <div class="bs-example col-md-7">
+                    <ul class="list-group sortable" id="issue_list">
+                        @foreach (var item in Model.Issues.Where(n => !n.IsFinished))
+                        {
+                            <li class="row list-group-item" data-id="@item.Id">
+                                <span class="glyphicon glyphicon-option-vertical pull-left move" aria-hidden="true"></span><span class="col-md-5"><input type="checkbox" /> @item.Text </span><span class="col-md-4">
+                                    @if (item.CreatedTime != null)
+                                {@item.CreatedTime.Value.ToString("dd/MM/yyyy HH:mm")}
+                            </span><span class="col-md-2">@if (@item.Category != null)
+                            {@item.Category.Name}</span><span class="badge pull-right">0</span>
+                        </li>
+                        }
+                        @foreach (var item in Model.Issues.Where(n => n.IsFinished))
+                        {
+                            <li class="row list-group-item disabled" data-id="@item.Id">
+                                <span class="glyphicon glyphicon-option-vertical pull-left move" aria-hidden="true"></span><span class="col-md-5"><input type="checkbox" checked /> @item.Text </span><span class="col-md-4">
+                                    @if (item.CreatedTime != null)
+                                    {@item.CreatedTime.Value.ToString("dd/MM/yyyy HH:mm")}
+                                </span><span class="col-md-2">@if (@item.Category != null)
+                                {@item.Category.Name}</span><span class="badge pull-right">0</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="bs-example col-md-4" style="margin-left: 20px;">
+                    <ul class="list-group sortable" id="uIssue_list">
+
+                        @foreach (var item in Model.UnderIssues.Where(n => !n.IsFinished))
+                        {
+                            <li class="list-group-item row" data-id="@item.Id">
+                                <span class="glyphicon glyphicon-option-vertical pull-left move" aria-hidden="true"></span>
+                                <label class="col-md-10"><input type="checkbox"> @item.Text</label>
+                            </li>
+                        }
+                        @foreach (var item in Model.UnderIssues.Where(n => n.IsFinished))
+                        {
+                            <li class="list-group-item row disabled" data-id="@item.Id">
+                                <span class="glyphicon glyphicon-option-vertical pull-left move" aria-hidden="true"></span>
+                                <label class="col-md-10"><input type="checkbox" checked> @item.Text</label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+
+    <script>
+        var activeCategoriId = @if(@Model.ActiveCategoryId == null){@Html.Raw("1")}else{@Model.ActiveCategoryId};
+    </script>    
+    @Scripts.Render("~/Scripts/Index")
+}
+
+

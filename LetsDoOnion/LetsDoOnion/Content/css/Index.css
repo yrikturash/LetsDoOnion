@@ -1,0 +1,40 @@
+
+    /*-------------------- Index screen ------------------------*/
+    .container {
+        width: 100% !important;
+    }
+
+    .bs-example li,
+    .bs-example label {
+        cursor: pointer;
+    }
+
+    .move {
+        cursor: move;
+    }
+
+    footer {
+        width: 250px;
+        display: table;
+        margin: 0 auto;
+    }
+
+    .remove_category {
+        color: #e45857;
+    }
+
+    input[type=checkbox] {
+        height: 20px;
+        width: 20px;
+        position: relative;
+        top: 5px;
+    }
+
+    #issue_list li span.glyphicon, #uIssue_list li span.glyphicon {
+        position: relative;
+        top: 7px;
+    }
+
+    #issue_list li.disabled, #uIssue_list li.disabled {
+        background-color: #ddd !important;
+    }

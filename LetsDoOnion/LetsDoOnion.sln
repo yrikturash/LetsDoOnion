@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsDoOnion", "LetsDoOnion\LetsDoOnion.csproj", "{78A343AD-7985-49B8-B22B-34002F94E115}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A686155A-520C-42FD-84A2-F03CA9FEDD28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsDoOnion.Domain.Core", "LetsDoOnion.Domain.Core\LetsDoOnion.Domain.Core.csproj", "{0334795E-8E8C-461B-9087-4BCEAB30C135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsDoOnion.Domain.Interfaces", "LetsDoOnion.Domain.Interfaces\LetsDoOnion.Domain.Interfaces.csproj", "{48366E68-CBBE-437B-AB84-F19809913BFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E770F746-CC2A-4FD0-8C63-E9F31E935472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsDoOnion.Services.Interfaces", "LetsDoOnion.Services.Interfaces\LetsDoOnion.Services.Interfaces.csproj", "{88A56451-5CCE-4C91-B54A-02BCC15D9C32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F9A207C1-50E9-4B4C-B21B-E369EF721499}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsDoOnion.Infrastructure.Data", "LetsDoOnion.Infrastructure.Data\LetsDoOnion.Infrastructure.Data.csproj", "{4659836B-E5D3-40F6-A578-9886C08DAF9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsDoOnion.Infrastructure.Business", "LetsDoOnion.Infrastructure.Business\LetsDoOnion.Infrastructure.Business.csproj", "{1F118C5D-EA0D-42D6-99FB-69D4069EBD7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78A343AD-7985-49B8-B22B-34002F94E115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78A343AD-7985-49B8-B22B-34002F94E115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78A343AD-7985-49B8-B22B-34002F94E115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78A343AD-7985-49B8-B22B-34002F94E115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0334795E-8E8C-461B-9087-4BCEAB30C135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0334795E-8E8C-461B-9087-4BCEAB30C135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0334795E-8E8C-461B-9087-4BCEAB30C135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0334795E-8E8C-461B-9087-4BCEAB30C135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48366E68-CBBE-437B-AB84-F19809913BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48366E68-CBBE-437B-AB84-F19809913BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48366E68-CBBE-437B-AB84-F19809913BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48366E68-CBBE-437B-AB84-F19809913BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A56451-5CCE-4C91-B54A-02BCC15D9C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A56451-5CCE-4C91-B54A-02BCC15D9C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A56451-5CCE-4C91-B54A-02BCC15D9C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A56451-5CCE-4C91-B54A-02BCC15D9C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4659836B-E5D3-40F6-A578-9886C08DAF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4659836B-E5D3-40F6-A578-9886C08DAF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4659836B-E5D3-40F6-A578-9886C08DAF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4659836B-E5D3-40F6-A578-9886C08DAF9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F118C5D-EA0D-42D6-99FB-69D4069EBD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F118C5D-EA0D-42D6-99FB-69D4069EBD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F118C5D-EA0D-42D6-99FB-69D4069EBD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F118C5D-EA0D-42D6-99FB-69D4069EBD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0334795E-8E8C-461B-9087-4BCEAB30C135} = {A686155A-520C-42FD-84A2-F03CA9FEDD28}
+		{48366E68-CBBE-437B-AB84-F19809913BFA} = {A686155A-520C-42FD-84A2-F03CA9FEDD28}
+		{88A56451-5CCE-4C91-B54A-02BCC15D9C32} = {E770F746-CC2A-4FD0-8C63-E9F31E935472}
+		{4659836B-E5D3-40F6-A578-9886C08DAF9D} = {F9A207C1-50E9-4B4C-B21B-E369EF721499}
+		{1F118C5D-EA0D-42D6-99FB-69D4069EBD7F} = {F9A207C1-50E9-4B4C-B21B-E369EF721499}
+	EndGlobalSection
+EndGlobal
