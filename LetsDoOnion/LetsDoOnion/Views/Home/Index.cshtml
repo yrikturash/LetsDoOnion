@@ -165,11 +165,12 @@
         </div>
     </div>
 </div>
-@section Scripts {
+ @section Scripts {
 
 
     <script>
         var activeCategoriId = @if(@Model.ActiveCategoryId == null){@Html.Raw("1")}else{@Model.ActiveCategoryId};
+        var userId = "@ViewBag.UserId";
     </script>    
     @Scripts.Render("~/Scripts/Index")
 }

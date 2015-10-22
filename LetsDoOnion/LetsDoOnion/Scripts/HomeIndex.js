@@ -6,8 +6,8 @@ $("body").on("click", "#add_btn", function () {
     console.log(text);
 
     $.ajax({
-        url: '/api/issue/' + activeCategoriId,
-        data: JSON.stringify(text),
+        url: '/api/issue?id=' + activeCategoriId+'&text='+text+'&userId='+userId,
+        //data: JSON.stringify({'text':text, 'userId':userId}),
         type: 'POST',
         contentType: 'application/json',
         complete: function () {
@@ -363,14 +363,15 @@ $("body").on("click", "#add_category_btn", function () {
     var categoryName = $('#category_input').val();
 
     $.ajax({
-        url: '/api/category?categoryName',
-        data: JSON.stringify(categoryName),
+        url: '/api/category?categoryName=' + categoryName+'&userId='+userId,
+        //data: JSON.stringify(categoryName),
         type: 'POST',
         contentType: 'application/json',
         complete: function () {
 
         },
         success: function (data) {
+            $('#category_input').text('');
             $('#list-all').after("<li class='accepts-issues ui-droppable'><input type='radio' name='list_id' value='all' checked='checked'>" +
                 "<a href='/Home/Index?categoryId=" + data.Id + "'>" +
                 "<i class='icon-list'></i> " + categoryName +

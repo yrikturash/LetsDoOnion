@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using LetsDoOnion.Domain.Core;
 using LetsDoOnion.Infrastructure.Data;
+using Microsoft.AspNet.Identity;
 using WebGrease.Css.Extensions;
 
 namespace LetsDoOnion.ApiControllers
@@ -37,11 +39,11 @@ namespace LetsDoOnion.ApiControllers
         /// </summary>
         /// <param name="categoryName">Catefory Name</param>
         // POST: api/Category
-        public HttpResponseMessage Post([FromBody]string categoryName)
+        public HttpResponseMessage Post(string categoryName, string userId)
         {
             try
             {
-                _unitOfWork.Categories.Create(new Category() { Name = categoryName });
+                _unitOfWork.Categories.Create(new Category() { Name = categoryName, UserId = userId });
                 _unitOfWork.Save();
 
                 var maxid = _unitOfWork.Categories.GetAll().Max(n => n.Id);

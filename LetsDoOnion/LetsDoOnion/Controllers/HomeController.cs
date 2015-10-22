@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using LetsDoOnion.Domain.Core;
 using LetsDoOnion.DTO;
 using LetsDoOnion.Infrastructure.Data;
+using Microsoft.AspNet.Identity;
 
 namespace LetsDoOnion.Controllers
 {
@@ -23,9 +24,11 @@ namespace LetsDoOnion.Controllers
         [HttpGet]
         public ActionResult Index(int? categoryId = null)
         {
+            var currentUserId = User.Identity.GetUserId();
+            ViewBag.UserId = currentUserId;
             var issues = (categoryId.HasValue) ?
-                _unitOfWork.Issues.GetAll().Where(n => n.CategoryId == categoryId).OrderByDescending(n => n.CreatedTime).ToList() :
-                _unitOfWork.Issues.GetAll().OrderByDescending(n => n.CreatedTime).ToList();
+                _unitOfWork.Issues.GetAll().Where(n => n.CategoryId == categoryId && n.UserId == currentUserId).OrderByDescending(n => n.CreatedTime).ToList() :
+                _unitOfWork.Issues.GetAll().Where(n => n.UserId == currentUserId).OrderByDescending(n => n.CreatedTime).ToList();
 
             IList<UnderIssue> uIssuesList = new List<UnderIssue>();
             if (issues.Count > 0)
@@ -35,7 +38,7 @@ namespace LetsDoOnion.Controllers
             }
 
 
-            IList<Category> categoriesList = _unitOfWork.Categories.GetAll().OrderByDescending(n => n.Id).ToList();
+            IList<Category> categoriesList = _unitOfWork.Categories.GetAll().Where(n => n.UserId == currentUserId).OrderByDescending(n => n.Id).ToList();
             //categoriesList.Remove(categoriesList.First(n=>n.Id == 1));
 
             return View(new IndexViewModel()

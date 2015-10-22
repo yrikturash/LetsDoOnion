@@ -16,5 +16,8 @@ namespace LetsDoOnion.Domain.Core
 
         public virtual Category Category { get; set; }
 
+        public string UserId { get; set; }
+
+
     }
 }

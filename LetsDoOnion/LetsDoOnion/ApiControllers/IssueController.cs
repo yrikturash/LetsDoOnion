@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.WebPages;
 using LetsDoOnion.Domain.Core;
 using LetsDoOnion.Infrastructure.Data;
+using Microsoft.AspNet.Identity;
 
 namespace LetsDoOnion.ApiControllers
 {
@@ -39,7 +41,7 @@ namespace LetsDoOnion.ApiControllers
         /// <param name="id">Category id</param>
         /// <param name="text">Issue name</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(int? id, [FromBody]string text)
+        public HttpResponseMessage Post(int? id, string text, string userId)
         {
             if (text.IsEmpty())
             {
@@ -52,7 +54,8 @@ namespace LetsDoOnion.ApiControllers
                     Text = text,
                     CreatedTime = DateTime.Now,
                     IsFinished = false,
-                    CategoryId = id
+                    CategoryId = id,
+                    UserId = userId
                 };
 
                 _unitOfWork.Issues.Create(issue);
